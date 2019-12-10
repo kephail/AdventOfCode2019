@@ -1,0 +1,22 @@
+{
+  "name": "adventofcode2019",
+  "version": "1.0.0",
+  "description": "https://adventofcode.com/",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kephail/AdventOfCode2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kephail/AdventOfCode2019/issues"
+  },
+  "homepage": "https://github.com/kephail/AdventOfCode2019#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
