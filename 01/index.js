@@ -18,12 +18,15 @@ function calculateRequiredFuel(module) {
   return Math.floor(module / 3) - 2;
 }
 
-(async function() {
+async function dayOnePartOne() {
   const inputs = await loadInput();
   const result = inputs.reduce((acc, cur) => {
     return calculateRequiredFuel(cur) + acc;
   }, 0);
   console.log(result);
-})();
+}
 
-module.exports = calculateRequiredFuel;
+module.exports = {
+  dayOnePartOne,
+  calculateRequiredFuel,
+};
