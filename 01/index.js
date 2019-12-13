@@ -18,6 +18,10 @@ function calculateRequiredFuel(module) {
   return Math.floor(module / 3) - 2;
 }
 
+function recursivelyCalculateRequiredFuel(module) {
+  return module;
+}
+
 async function dayOnePartOne() {
   const inputs = await loadInput();
   const result = inputs.reduce((acc, cur) => {
@@ -26,7 +30,11 @@ async function dayOnePartOne() {
   console.log(result);
 }
 
+function dayOnePartTwo() {}
+
 module.exports = {
   dayOnePartOne,
+  dayOnePartTwo,
   calculateRequiredFuel,
+  recursivelyCalculateRequiredFuel,
 };
