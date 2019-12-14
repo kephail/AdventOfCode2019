@@ -14,7 +14,6 @@ function calculateRequiredFuel(module) {
 }
 
 function recursivelyCalculateRequiredFuel(module, totalFuel = 0) {
-  console.log(module, totalFuel);
   const fuel = calculateRequiredFuel(module);
   if (fuel <= 0) {
     return totalFuel;
@@ -28,10 +27,18 @@ async function dayOnePartOne() {
   const result = inputs.reduce((acc, cur) => {
     return calculateRequiredFuel(cur) + acc;
   }, 0);
+  console.log("dayOnePartOne:");
   console.log(result);
 }
 
-function dayOnePartTwo() {}
+async function dayOnePartTwo() {
+  const inputs = await loadInput();
+  const result = inputs.reduce((acc, cur) => {
+    return recursivelyCalculateRequiredFuel(cur) + acc;
+  }, 0);
+  console.log("dayOnePartTwo:");
+  console.log(result);
+}
 
 module.exports = {
   dayOnePartOne,

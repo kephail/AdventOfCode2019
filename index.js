@@ -1,3 +1,4 @@
-const { dayOnePartOne } = require("./01");
+const { dayOnePartOne, dayOnePartTwo } = require("./01");
 
 dayOnePartOne();
+dayOnePartTwo();
