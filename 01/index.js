@@ -10,16 +10,17 @@ async function loadInput() {
 }
 
 function calculateRequiredFuel(module) {
-  /*
-    Fuel required to launch a given module is based on its mass. 
-    Specifically, to find the fuel required for a module, take its mass, 
-    divide by three, round down, and subtract 2.
-    */
   return Math.floor(module / 3) - 2;
 }
 
-function recursivelyCalculateRequiredFuel(module) {
-  return module;
+function recursivelyCalculateRequiredFuel(module, totalFuel = 0) {
+  console.log(module, totalFuel);
+  const fuel = calculateRequiredFuel(module);
+  if (fuel <= 0) {
+    return totalFuel;
+  }
+  totalFuel += fuel;
+  return recursivelyCalculateRequiredFuel(fuel, totalFuel);
 }
 
 async function dayOnePartOne() {
