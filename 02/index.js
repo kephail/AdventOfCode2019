@@ -7,33 +7,61 @@ async function loadInput() {
   return data;
 }
 
+function interpretIntcode(program) {
+  for (let i = 0; i < program.length; i += 4) {
+    const opcode = program[i];
+    if (opcode === 99) return program;
+    if (opcode === 1) {
+      program[program[i + 3]] =
+        program[program[i + 1]] + program[program[i + 2]];
+    }
+    if (opcode === 2) {
+      program[program[i + 3]] =
+        program[program[i + 1]] * program[program[i + 2]];
+    }
+  }
+  return program;
+}
+
+function findNounAndVerb(originalProgram, desiredOutput) {
+  let noun = 0;
+  let verb = 0;
+
+  for (let i = 0; i <= 99; i++) {
+    for (let j = 0; j <= 99; j++) {
+      let program = [...originalProgram];
+      program[1] = i;
+      program[2] = j;
+      const result = interpretIntcode(program);
+      if (result[0] === desiredOutput) {
+        noun = i;
+        verb = j;
+      }
+    }
+  }
+  return { noun, verb };
+}
+
 async function dayTwoPartOne() {
   const input = await loadInput();
-  let steps = input.split(",").map(step => parseInt(step));
-  steps[1] = 12;
-  steps[2] = 2;
-  steps = steps.toString();
-  const result = interpretIntcode(steps);
-  console.log("dayOnePartTwo:");
+  let inputs = input.split(",").map(step => parseInt(step));
+  inputs[1] = 12;
+  inputs[2] = 2;
+  const result = interpretIntcode(inputs);
+  console.log("dayTwoPartOne:");
   console.log(result);
 }
 
-function interpretIntcode(program) {
-  const steps = program.split(",").map(step => parseInt(step));
-  for (let i = 0; i < steps.length; i += 4) {
-    const opcode = steps[i];
-    if (opcode === 99) return steps.toString();
-    if (opcode === 1) {
-      steps[steps[i + 3]] = steps[steps[i + 1]] + steps[steps[i + 2]];
-    }
-    if (opcode === 2) {
-      steps[steps[i + 3]] = steps[steps[i + 1]] * steps[steps[i + 2]];
-    }
-  }
-  return steps.toString();
+async function dayTwoPartTwo() {
+  const input = await loadInput();
+  let inputs = input.split(",").map(step => parseInt(step));
+  const { noun, verb } = findNounAndVerb(inputs, 19690720);
+  console.log("dayOnePartTwo:");
+  console.log(`noun: ${noun}, verb: ${verb}`);
 }
 
 module.exports = {
   dayTwoPartOne,
+  dayTwoPartTwo,
   interpretIntcode,
 };
