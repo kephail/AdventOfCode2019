@@ -12,12 +12,10 @@ function interpretIntcode(program) {
     const opcode = program[i];
     if (opcode === 99) return program;
     if (opcode === 1) {
-      program[program[i + 3]] =
-        program[program[i + 1]] + program[program[i + 2]];
+      program[program[i + 3]] = program[program[i + 1]] + program[program[i + 2]];
     }
     if (opcode === 2) {
-      program[program[i + 3]] =
-        program[program[i + 1]] * program[program[i + 2]];
+      program[program[i + 3]] = program[program[i + 1]] * program[program[i + 2]];
     }
   }
   return program;
