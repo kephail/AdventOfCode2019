@@ -24,27 +24,23 @@ function interpretIntcode(program) {
 }
 
 function findNounAndVerb(originalProgram, desiredOutput) {
-  let noun = 0;
-  let verb = 0;
-
-  for (let i = 0; i <= 99; i++) {
-    for (let j = 0; j <= 99; j++) {
+  for (let noun = 0; noun <= 99; noun++) {
+    for (let verb = 0; verb <= 99; verb++) {
       let program = [...originalProgram];
-      program[1] = i;
-      program[2] = j;
+      program[1] = noun;
+      program[2] = verb;
       const result = interpretIntcode(program);
       if (result[0] === desiredOutput) {
-        noun = i;
-        verb = j;
+        return { noun, verb };
       }
     }
   }
-  return { noun, verb };
+  return { noun: 0, verb: 0 };
 }
 
 async function dayTwoPartOne() {
   const input = await loadInput();
-  let inputs = input.split(",").map(step => parseInt(step));
+  let inputs = input.split(",").map(Number);
   inputs[1] = 12;
   inputs[2] = 2;
   const result = interpretIntcode(inputs);
